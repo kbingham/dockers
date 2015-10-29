@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#CONTAINER=$(basename $0)
+CONTAINER=ubuntu/android-dev
+
+USB="--privileged -v /dev/bus/usb:/dev/bus/usb"
+XFORWARD="-e DISPLAY=$DISPLAY.0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro"
+
+echo Executing "$@" in "$CONTAINER"
+docker run \
+	-v "$PWD":"$PWD" \
+	-v "$HOME":"$HOME" \
+	$XFORWARD \
+	$USB \
+	-w "$PWD" -it $CONTAINER "$@"
