@@ -8,7 +8,7 @@ TARGETS		:= $(shell find  * -name Dockerfile)
 TARGETS_BUILD	:= $(TARGETS:/Dockerfile=.build)
 TARGETS_RUN	:= $(TARGETS:/Dockerfile=.run)
 
-all:
+all: $(TARGETS_BUILD)
 
 ubuntu/android-dev.build: ubuntu/14.04-dev.build
 
