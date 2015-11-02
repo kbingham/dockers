@@ -1,0 +1,15 @@
+#!/bin/sh
+
+CONTAINER=ubuntu/14.04-dev
+XFORWARD="-e DISPLAY=$DISPLAY.0 -v /tmp/.X11-unix:/tmp/.X11-unix"
+
+echo Executing "$@" in "$CONTAINER"
+docker run \
+	-v "$PWD":"$PWD" \
+	-v "$HOME":"$HOME" \
+	-v "/opt":"/opt" \
+	-v "/opt/root":"/opt/root" \
+	-v "/var/lib/tftpboot":"/var/lib/tftpboot" \
+	$XFORWARD \
+	-w "$PWD" -it $CONTAINER "$@"
+
