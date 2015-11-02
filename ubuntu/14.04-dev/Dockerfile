@@ -47,6 +47,7 @@ RUN apt-get update && apt-get install -y \
 	squashfs-tools \
 	texinfo \
 	time \
+	vim \
 	wget \
 	xsltproc \
 	zip \
