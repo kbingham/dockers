@@ -1,0 +1,24 @@
+#!/bin/sh
+
+#CONTAINER=$(basename $0)
+CONTAINER="$1"
+shift
+
+XFORWARD="-e DISPLAY=$DISPLAY.0 -v /tmp/.X11-unix:/tmp/.X11-unix"
+
+#
+# We can now run in 'arm64' containers:
+# docker run -it --rm multiarch/alpine:aarch64-edge
+# 
+
+
+echo Executing "$@" in "$CONTAINER"
+docker run \
+	-v "$PWD":"$PWD" \
+	-v "$HOME":"$HOME" \
+	-v "/opt":"/opt" \
+	-v "/opt/root":"/opt/root" \
+	-v "/var/lib/tftpboot":"/var/lib/tftpboot" \
+	$XFORWARD \
+	-w "$PWD" -it $CONTAINER "$@"
+
